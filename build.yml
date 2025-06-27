@@ -1,0 +1,33 @@
+name: Build CuttingStock.exe
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ortools pyinstaller
+
+      - name: Build executable
+        run: |
+          pyinstaller --clean --onefile cutting_stock.spec
+
+      - name: Archive artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cutting_stock
+          path: dist/cutting_stock.exe
