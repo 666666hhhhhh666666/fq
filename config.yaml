@@ -1,0 +1,43 @@
+translator:
+  provider: libretranslate
+  endpoint: https://libretranslate.de/translate
+  api_key: ""
+  timeout_s: 15
+  retries: 2
+
+crawler:
+  timeout_s: 20
+  retries: 2
+  use_playwright_fallback: true
+  user_agent: "Mozilla/5.0 (compatible; FQBot/1.0; +https://example.com/bot)"
+
+estimator:
+  default_range:
+    min: 10
+    max: 80
+  company_type_ranges:
+    打印厂:
+      min: 80
+      max: 300
+    贸易商:
+      min: 30
+      max: 120
+    终端产品商:
+      min: 20
+      max: 90
+    打印机代理商:
+      min: 15
+      max: 60
+    分销商:
+      min: 40
+      max: 160
+  industry_bias:
+    包装:
+      min_delta: 20
+      max_delta: 50
+    标签:
+      min_delta: 30
+      max_delta: 70
+    印刷:
+      min_delta: 15
+      max_delta: 40
